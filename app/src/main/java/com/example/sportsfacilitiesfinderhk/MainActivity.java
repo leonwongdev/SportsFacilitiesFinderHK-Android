@@ -43,23 +43,22 @@ public class MainActivity extends AppCompatActivity {
         sportsTypeRecView.setLayoutManager(new GridLayoutManager(this,2));
         sportsTypeRecView.addItemDecoration(new GridSpacingItemDecoration(2,50,true));
 
-        APIHelper.sportsFacilitiesAPI().getSkateBoardCourts().enqueue(new Callback<List<SportFacility>>() {
+        APIHelper.sportsFacilitiesAPI().getArcheryRange().enqueue(new Callback<List<SportFacility>>() {
             @Override
             public void onResponse(Call<List<SportFacility>> call, Response<List<SportFacility>> response) {
                 if (!response.isSuccessful()){
                     //HTTP status is not 200 to 300
-                    Toast.makeText(getApplicationContext(),
-                            "Response not successful",
-                            Toast.LENGTH_LONG).show();
+                    Log.d("onResponse", "Response Not Successful");
                     return;
                 }
-                Log.d("TAG", response.body().get(0).getAncillaryFacilities());
+                Log.d("onResponse", "facility.toString()");
+                for (SportFacility facility: response.body()) {
+                    Log.d("onResponse", facility.getRemarks());
+                }
             }
             @Override
             public void onFailure(Call<List<SportFacility>> call, Throwable t) {
-                Toast.makeText(getApplicationContext(),
-                        "Network related failure",
-                        Toast.LENGTH_LONG).show();
+                Log.d("onFailure", "Unknown Failure / Network Failure");
             }
         });
     }

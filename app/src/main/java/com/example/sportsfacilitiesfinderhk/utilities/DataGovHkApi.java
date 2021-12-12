@@ -18,8 +18,8 @@ public interface DataGovHkApi {
     @GET("facility-sbg.json")
     Call<List<SportFacility>> getSkateBoardCourts();
 
-    @GET("facility-hbc.json")
-    Call<List<SportFacility>> aaa();
+    @GET("facility-ar.json")
+    Call<List<SportFacility>> getArcheryRange();
 
     @GET("facility-hbc.json")
     Call<List<SportFacility>> aaaa();

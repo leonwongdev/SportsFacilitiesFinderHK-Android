@@ -59,7 +59,7 @@ public class SportFacility {
     }
 
     public String getAncillaryFacilities() {
-        ancillaryFacilities = Html.fromHtml(ancillaryFacilities,Html.FROM_HTML_MODE_COMPACT).toString();
+        ancillaryFacilities = Html.fromHtml(ancillaryFacilities, Html.FROM_HTML_MODE_COMPACT).toString();
         return ancillaryFacilities;
     }
 
@@ -72,7 +72,7 @@ public class SportFacility {
     }
 
     public String getRemarks() {
-        return remarks;
+        return Html.fromHtml(remarks, Html.FROM_HTML_MODE_COMPACT).toString();
     }
 
     public String getLongtitude() {
