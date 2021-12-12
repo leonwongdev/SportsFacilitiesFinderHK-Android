@@ -47,9 +47,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<SportFacility>> call, Response<List<SportFacility>> response) {
                 if (!response.isSuccessful()){
-                    //not http 200-300
+                    //HTTP status is not 200 to 300
                     Toast.makeText(getApplicationContext(),
-                            "response not successful",
+                            "Response not successful",
                             Toast.LENGTH_LONG).show();
                     return;
                 }
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<SportFacility>> call, Throwable t) {
                 Toast.makeText(getApplicationContext(),
-                        "onFailure handball",
+                        "Network related failure",
                         Toast.LENGTH_LONG).show();
             }
         });
