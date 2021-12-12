@@ -1,6 +1,6 @@
 package com.example.sportsfacilitiesfinderhk.utilities;
 
-import com.example.sportsfacilitiesfinderhk.model.SportFacility;
+import com.example.sportsfacilitiesfinderhk.models.SportFacility;
 
 import java.util.List;
 

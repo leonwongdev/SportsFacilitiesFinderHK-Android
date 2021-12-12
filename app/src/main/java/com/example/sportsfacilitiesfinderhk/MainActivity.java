@@ -6,11 +6,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.example.sportsfacilitiesfinderhk.model.SportFacility;
+import com.example.sportsfacilitiesfinderhk.adapters.SportsTypeRecViewAdapter;
+import com.example.sportsfacilitiesfinderhk.models.SportFacility;
 import com.example.sportsfacilitiesfinderhk.utilities.APIHelper;
-import com.example.sportsfacilitiesfinderhk.utilities.DataGovHkApi;
 import com.example.sportsfacilitiesfinderhk.utilities.GridSpacingItemDecoration;
 
 import java.util.ArrayList;
@@ -19,8 +18,6 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
     RecyclerView sportsTypeRecView;

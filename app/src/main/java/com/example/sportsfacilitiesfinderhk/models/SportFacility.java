@@ -1,4 +1,4 @@
-package com.example.sportsfacilitiesfinderhk.model;
+package com.example.sportsfacilitiesfinderhk.models;
 
 import android.text.Html;
 

@@ -1,7 +1,6 @@
-package com.example.sportsfacilitiesfinderhk;
+package com.example.sportsfacilitiesfinderhk.adapters;
 
 import android.content.Context;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +9,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.sportsfacilitiesfinderhk.R;
 
 import java.util.ArrayList;
 
