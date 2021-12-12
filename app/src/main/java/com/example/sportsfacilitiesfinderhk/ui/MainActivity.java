@@ -10,7 +10,7 @@ import android.util.Log;
 import com.example.sportsfacilitiesfinderhk.R;
 import com.example.sportsfacilitiesfinderhk.adapters.SportsTypeRecViewAdapter;
 import com.example.sportsfacilitiesfinderhk.models.SportFacility;
-import com.example.sportsfacilitiesfinderhk.utilities.APIHelper;
+import com.example.sportsfacilitiesfinderhk.network.APIHelper;
 import com.example.sportsfacilitiesfinderhk.utilities.GridSpacingItemDecoration;
 
 import java.util.ArrayList;

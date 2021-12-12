@@ -1,4 +1,4 @@
-package com.example.sportsfacilitiesfinderhk.utilities;
+package com.example.sportsfacilitiesfinderhk.network;
 
 import com.example.sportsfacilitiesfinderhk.models.SportFacility;
 
