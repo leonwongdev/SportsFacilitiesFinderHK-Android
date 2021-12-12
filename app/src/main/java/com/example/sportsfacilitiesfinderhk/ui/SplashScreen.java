@@ -1,14 +1,14 @@
-package com.example.sportsfacilitiesfinderhk;
+package com.example.sportsfacilitiesfinderhk.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.animation.Animator;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.airbnb.lottie.LottieAnimationView;
-import com.airbnb.lottie.utils.LottieValueAnimator;
+import com.example.sportsfacilitiesfinderhk.R;
+import com.example.sportsfacilitiesfinderhk.ui.MainActivity;
 
 public class SplashScreen extends AppCompatActivity {
     LottieAnimationView lottieAnimationView;
@@ -18,7 +18,7 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
         lottieAnimationView = findViewById(R.id.lottie_splash_ani_view);
-        lottieAnimationView.setSpeed(2.0f);
+        lottieAnimationView.setSpeed(3);
         lottieAnimationView.addAnimatorListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
