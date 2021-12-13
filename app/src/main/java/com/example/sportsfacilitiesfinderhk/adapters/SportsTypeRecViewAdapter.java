@@ -40,7 +40,9 @@ public class SportsTypeRecViewAdapter extends RecyclerView.Adapter<SportsTypeRec
             @Override
             public void onClick(View v) {
                 //TODO: start activity
-                context.startActivity(new Intent(context, FacilitiesListActivity.class));
+                Intent intent = new Intent(context, FacilitiesListActivity.class);
+                intent.putExtra("sportsType", sports[position]);
+                context.startActivity(intent);
             }
         });
         holder.titleTextView.setText(sports[position]);

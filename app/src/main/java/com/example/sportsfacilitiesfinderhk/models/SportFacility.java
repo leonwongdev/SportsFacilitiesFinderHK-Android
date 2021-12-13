@@ -55,6 +55,9 @@ public class SportFacility {
     }
 
     public String getNumCourts() {
+        if(numCourts == null){
+            numCourts = "1";
+        }
         return numCourts;
     }
 
@@ -64,6 +67,7 @@ public class SportFacility {
     }
 
     public String getOpeningHours() {
+        openingHours = Html.fromHtml(openingHours, Html.FROM_HTML_MODE_COMPACT).toString();
         return openingHours;
     }
 

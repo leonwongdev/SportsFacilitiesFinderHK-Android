@@ -9,6 +9,16 @@ public class DataManager {
     static String[] sportTypes = {"Football","Basketball",
             "Handball","Archery","Netball","Gateball","Cricket","Volleyball"};
 
+    static List<SportFacility> currentFacilityList;
+
+    public static List<SportFacility> getCurrentFacilityList() {
+        return currentFacilityList;
+    }
+
+    public static void setCurrentFacilityList(List<SportFacility> currentFacilityList) {
+        DataManager.currentFacilityList = currentFacilityList;
+    }
+
     public static String[] getSportTypes() {
         return sportTypes;
     }

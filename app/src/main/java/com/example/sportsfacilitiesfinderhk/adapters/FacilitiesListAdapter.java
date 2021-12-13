@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sportsfacilitiesfinderhk.R;
 import com.example.sportsfacilitiesfinderhk.models.SportFacility;
+import com.example.sportsfacilitiesfinderhk.ui.facilitiesdetails.FacilitiesDetailsActivity;
 import com.example.sportsfacilitiesfinderhk.ui.facilitieslist.FacilitiesListActivity;
 
 import java.util.ArrayList;
@@ -40,8 +41,9 @@ public class FacilitiesListAdapter extends RecyclerView.Adapter<FacilitiesListAd
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: start activity
-//                context.startActivity(new Intent(context, FacilitiesListActivity.class));
+                Intent intent = new Intent(context, FacilitiesDetailsActivity.class);
+                intent.putExtra("index", position);
+                context.startActivity(intent);
             }
         });
         holder.titleTextView.setText(sportFacilities.get(position).getName());
