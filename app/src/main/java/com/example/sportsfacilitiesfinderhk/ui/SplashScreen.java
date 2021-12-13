@@ -44,13 +44,14 @@ public class SplashScreen extends AppCompatActivity {
 
             @Override
             public void onAnimationCancel(Animator animation) {
-
+                startActivity(new Intent(SplashScreen.this, MainActivity.class));
+                finish();
             }
 
             @Override
             public void onAnimationRepeat(Animator animation) {
                 if (responseCount == 2) {
-                    startActivity(new Intent(SplashScreen.this, MainActivity.class));
+                    lottieAnimationView.cancelAnimation();
                 }
             }
         });

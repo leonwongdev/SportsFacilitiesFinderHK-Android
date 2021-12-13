@@ -58,6 +58,7 @@ public class FacilitiesListActivity extends FragmentActivity implements OnMapRea
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         map = googleMap;
+        map.getUiSettings().setZoomControlsEnabled(true);
         List<SportFacility> sportFacilities = DataManager.getHandballCourts();
         for (SportFacility sportFacility: sportFacilities) {
             LatLng marker = new LatLng(sportFacility.getLatitude(),sportFacility.getLongtitude());
