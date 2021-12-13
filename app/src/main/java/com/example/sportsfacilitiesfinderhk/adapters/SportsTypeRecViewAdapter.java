@@ -12,6 +12,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sportsfacilitiesfinderhk.R;
+import com.example.sportsfacilitiesfinderhk.ui.facilitiesdetails.FacilitiesDetailsActivity;
 import com.example.sportsfacilitiesfinderhk.ui.facilitieslist.FacilitiesListActivity;
 
 import java.util.ArrayList;
