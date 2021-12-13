@@ -43,6 +43,8 @@ public class SportFacility {
     }
 
     public String getName() {
+
+        name = Html.fromHtml(name, Html.FROM_HTML_MODE_COMPACT).toString();
         return name;
     }
 

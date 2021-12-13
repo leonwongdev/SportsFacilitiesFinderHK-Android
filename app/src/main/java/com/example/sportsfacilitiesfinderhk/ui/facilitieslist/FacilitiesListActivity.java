@@ -30,7 +30,9 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -86,29 +88,52 @@ public class FacilitiesListActivity extends FragmentActivity implements OnMapRea
     private List<SportFacility> getFacilityType(){
 
         switch(getIntent().getStringExtra("sportsType")){
-            case "Football":
-               // DataManager.setCurrentFacilityList(DataManager.);
-                break;
-            case "Handball":
-                DataManager.setCurrentFacilityList(DataManager.getHandballCourts());
-                break;
             case "Archery":
                 DataManager.setCurrentFacilityList(DataManager.getArcheryRanges());
                 break;
-            case "ad":
 
+            case "Beach Volleyball":
+                DataManager.setCurrentFacilityList(DataManager.getBeachVolleyballCourts());
                 break;
-            case "adf":
 
+            case "Cricket":
+                List<SportFacility> cricketList = DataManager.getCricketGrounds1();
+                cricketList.addAll(DataManager.getCricketGrounds2());
+                cricketList.addAll(DataManager.getCricketGrounds3());
+                Set<SportFacility> cricketSet = new LinkedHashSet<>();
+                cricketSet.addAll(cricketList);
+                cricketList.clear();
+                cricketList.addAll(cricketSet);
+                DataManager.setCricketGrounds(cricketList);
+                DataManager.setCurrentFacilityList(cricketList);
                 break;
-            case "adfg":
 
+            case "Gateball":
+                DataManager.setCurrentFacilityList(DataManager.getGateballCourts());
                 break;
-            case "asdfg":
 
+            case "Handball":
+                DataManager.setCurrentFacilityList(DataManager.getHandballCourts());
                 break;
-            case "asdghgh":
 
+            case "Netball":
+                DataManager.setCurrentFacilityList(DataManager.getNetballCourts());
+                break;
+
+            case "Roller Skating":
+                DataManager.setCurrentFacilityList(DataManager.getRollerSkatingRinks());
+                break;
+
+            case "Skateboarding":
+                List<SportFacility> skateboardList = DataManager.getSkateboardGrounds1();
+                skateboardList.addAll(DataManager.getSkateboardGrounds2());
+                Set<SportFacility> skateboardSet = new LinkedHashSet<>();
+                skateboardSet.addAll(skateboardList);
+                skateboardList.clear();
+                skateboardList.addAll(skateboardSet);
+                DataManager.setSkateboardGrounds(skateboardList);
+                DataManager.setCurrentFacilityList(skateboardList);
+                DataManager.setCurrentFacilityList(DataManager.getSkateboardGrounds());
                 break;
 
         }
