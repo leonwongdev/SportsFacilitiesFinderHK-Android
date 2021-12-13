@@ -3,15 +3,15 @@ package com.example.sportsfacilitiesfinderhk.ui;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.animation.Animator;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.sportsfacilitiesfinderhk.R;
 import com.example.sportsfacilitiesfinderhk.models.SportFacility;
 import com.example.sportsfacilitiesfinderhk.network.APIHelper;
-import com.example.sportsfacilitiesfinderhk.ui.MainActivity;
-import com.example.sportsfacilitiesfinderhk.ui.facilitieslist.FacilitiesListActivity;
 import com.example.sportsfacilitiesfinderhk.utilities.AlertHelper;
 import com.example.sportsfacilitiesfinderhk.utilities.DataManager;
 
@@ -44,17 +44,23 @@ public class SplashScreen extends AppCompatActivity {
 
             @Override
             public void onAnimationCancel(Animator animation) {
-
+                startActivity(new Intent(SplashScreen.this, MainActivity.class));
+                finish();
             }
 
             @Override
             public void onAnimationRepeat(Animator animation) {
                 if (responseCount == 2) {
-                    startActivity(new Intent(SplashScreen.this, MainActivity.class));
+                    lottieAnimationView.cancelAnimation();
                 }
             }
         });
 
+        if (!isNetworkAvailable(SplashScreen.this)) {
+            AlertHelper.showErrorAlert(SplashScreen.this, "No internet connections, please check your network.");
+            return;
+        }
+        
         APIHelper.sportsFacilitiesAPI().getArcheryRange().enqueue(new Callback<List<SportFacility>>() {
             @Override
             public void onResponse(Call<List<SportFacility>> call, Response<List<SportFacility>> response) {
@@ -91,5 +97,10 @@ public class SplashScreen extends AppCompatActivity {
             }
         });
 
+    }
+
+    public boolean isNetworkAvailable(Context context) {
+        ConnectivityManager connectivityManager = ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE));
+        return connectivityManager.getActiveNetworkInfo() != null && connectivityManager.getActiveNetworkInfo().isConnected();
     }
 }
