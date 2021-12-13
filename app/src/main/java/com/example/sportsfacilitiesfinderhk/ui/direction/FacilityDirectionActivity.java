@@ -46,6 +46,7 @@ public class FacilityDirectionActivity extends FragmentActivity implements OnMap
     FusedLocationProviderClient fusedLocationProviderClient;
     GeoApiContext geoApiContext;
     ArrayList<RouteData> routeDataArrayList = new ArrayList<>();
+    Marker prevMarker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,11 +64,14 @@ public class FacilityDirectionActivity extends FragmentActivity implements OnMap
         }
         map = googleMap;
         map.getUiSettings().setZoomControlsEnabled(true);
-        SportFacility sportFac = DataManager.getHandballCourts().get(0);
+
+        int index = getIntent().getIntExtra("index",0);
+        SportFacility sportFac = DataManager.getCurrentFacilityList().get(index);
         LatLng latlng = new LatLng(sportFac.getLatitude(), sportFac.getLongtitude());
-        map.addMarker(new MarkerOptions().position(latlng).title(sportFac.getName()));
+        prevMarker = map.addMarker(new MarkerOptions().position(latlng).title(sportFac.getName()));
         map.setMyLocationEnabled(true);
         addPathToMap(sportFac);
+
         map.setOnPolylineClickListener(this);
 
         if (geoApiContext == null) {
@@ -122,6 +126,9 @@ public class FacilityDirectionActivity extends FragmentActivity implements OnMap
                     routeDataArrayList.clear();
                     routeDataArrayList = new ArrayList<>();
                 }
+
+                double duration = 999999999;
+                Polyline fastestRoute = null;
                 for(DirectionsRoute route: result.routes){
                     Log.d("TAG", "run: leg: " + route.legs[0].toString());
                     List<com.google.maps.model.LatLng> decodedPath = PolylineEncoding.decode(route.overviewPolyline.getEncodedPath());
@@ -130,9 +137,6 @@ public class FacilityDirectionActivity extends FragmentActivity implements OnMap
 
                     // This loops through all the LatLng coordinates of ONE polyline.
                     for(com.google.maps.model.LatLng latLng: decodedPath){
-
-//                        Log.d(TAG, "run: latlng: " + latLng.toString());
-
                         newDecodedPath.add(new LatLng(
                                 latLng.lat,
                                 latLng.lng
@@ -141,7 +145,18 @@ public class FacilityDirectionActivity extends FragmentActivity implements OnMap
                     Polyline polyline = map.addPolyline(new PolylineOptions().addAll(newDecodedPath));
                     polyline.setColor(ContextCompat.getColor(FacilityDirectionActivity.this, R.color.gray));
                     polyline.setClickable(true);
+
+                    double tempDuration = route.legs[0].duration.inSeconds;
+                    if(tempDuration < duration){
+                        duration = tempDuration;
+                        fastestRoute = polyline;
+                    }
                     routeDataArrayList.add(new RouteData(polyline, route.legs[0]));
+                }
+                if (fastestRoute != null) {
+//                    fastestRoute.setColor(ContextCompat.getColor(FacilityDirectionActivity.this, R.color.teal_200));
+//                    fastestRoute.setZIndex(1);
+                   onPolylineClick(fastestRoute);
                 }
             }
         });
@@ -197,16 +212,16 @@ public class FacilityDirectionActivity extends FragmentActivity implements OnMap
                         routeData.getLeg().endLocation.lat,
                         routeData.getLeg().endLocation.lng
                 );
-
-                Marker marker = map.addMarker(new MarkerOptions()
+                prevMarker.remove();
+                prevMarker = map.addMarker(new MarkerOptions()
                         .position(endLocation)
                         .title("Route #" + index)
-                        .snippet("Duration(Car): " + routeData.getLeg().duration
+                        .snippet("Duration (Driving): " + routeData.getLeg().duration
                         ));
 
 
-                if (marker != null) {
-                    marker.showInfoWindow();
+                if (prevMarker != null) {
+                    prevMarker.showInfoWindow();
                 }
             } else {
                 routeData.getPolyline().setColor(ContextCompat.getColor(FacilityDirectionActivity.this, R.color.gray));
