@@ -1,17 +1,24 @@
 package com.example.sportsfacilitiesfinderhk.ui;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.sportsfacilitiesfinderhk.R;
 import com.example.sportsfacilitiesfinderhk.adapters.SportsTypeRecViewAdapter;
 import com.example.sportsfacilitiesfinderhk.models.SportFacility;
 import com.example.sportsfacilitiesfinderhk.network.APIHelper;
+import com.example.sportsfacilitiesfinderhk.utilities.AlertHelper;
 import com.example.sportsfacilitiesfinderhk.utilities.GridSpacingItemDecoration;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,23 +48,30 @@ public class MainActivity extends AppCompatActivity {
         sportsTypeRecView.setLayoutManager(new GridLayoutManager(this,2));
         sportsTypeRecView.addItemDecoration(new GridSpacingItemDecoration(2,50,true));
 
-        APIHelper.sportsFacilitiesAPI().getArcheryRange().enqueue(new Callback<List<SportFacility>>() {
-            @Override
-            public void onResponse(Call<List<SportFacility>> call, Response<List<SportFacility>> response) {
-                if (!response.isSuccessful()){
-                    //HTTP status is not 200 to 300
-                    Log.d("onResponse", "Response Not Successful");
-                    return;
+
+
+        if (checkGooglePlayServices()) {
+            Toast.makeText(MainActivity.this, "Google play service available", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(MainActivity.this, "Google play service not available", Toast.LENGTH_SHORT).show();
+        };
+    }
+
+    private boolean checkGooglePlayServices() {
+        GoogleApiAvailability googleApiAvailability = GoogleApiAvailability.getInstance();
+        int result = googleApiAvailability.isGooglePlayServicesAvailable(this);
+        if (result == ConnectionResult.SUCCESS) {
+            return true;
+        } else if (googleApiAvailability.isUserResolvableError(result)){
+            Dialog dialog = googleApiAvailability.getErrorDialog(this, result, 201, new DialogInterface.OnCancelListener() {
+                @Override
+                public void onCancel(DialogInterface dialog) {
+                    Toast.makeText(MainActivity.this, "User Cancelled Dialog", Toast.LENGTH_SHORT).show();
                 }
-                Log.d("onResponse", "facility.toString()");
-                for (SportFacility facility: response.body()) {
-                    Log.d("onResponse", facility.getRemarks());
-                }
-            }
-            @Override
-            public void onFailure(Call<List<SportFacility>> call, Throwable t) {
-                Log.d("onFailure", "Unknown Failure / Network Failure");
-            }
-        });
+            });
+            dialog.show();
+        }
+        return false;
     }
 }
+
