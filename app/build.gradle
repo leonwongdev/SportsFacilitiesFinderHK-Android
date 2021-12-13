@@ -53,5 +53,12 @@ dependencies {
     //google map service
     implementation 'com.google.android.gms:play-services-maps:18.0.0'
 
+    //Get device location
+    implementation "com.google.android.gms:play-services-location:15.0.1"
+
+    //Google direction api
+    implementation 'com.google.maps:google-maps-services:1.0.1'
+    implementation 'org.slf4j:slf4j-simple:1.7.25'
+
 
 }
