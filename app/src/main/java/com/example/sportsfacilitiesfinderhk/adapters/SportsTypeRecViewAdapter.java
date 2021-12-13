@@ -18,9 +18,9 @@ import java.util.ArrayList;
 
 public class SportsTypeRecViewAdapter extends RecyclerView.Adapter<SportsTypeRecViewAdapter.ViewHolder> {
     Context context;
-    ArrayList<String> sports;
+    String[] sports;
 
-    public SportsTypeRecViewAdapter(Context context, ArrayList<String> sports) {
+    public SportsTypeRecViewAdapter(Context context, String[] sports) {
         this.context = context;
         this.sports = sports;
     }
@@ -42,12 +42,12 @@ public class SportsTypeRecViewAdapter extends RecyclerView.Adapter<SportsTypeRec
                 context.startActivity(new Intent(context, FacilitiesListActivity.class));
             }
         });
-        holder.titleTextView.setText(sports.get(position));
+        holder.titleTextView.setText(sports[position]);
     }
 
     @Override
     public int getItemCount() {
-        return sports.size();
+        return sports.length;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
