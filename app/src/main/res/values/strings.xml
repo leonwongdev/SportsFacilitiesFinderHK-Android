@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SportsFacilitiesFinderHK</string>
+    <string name="map_key" translatable="false">AIzaSyBO_bht-gYmRMVSI4QiyrW7paeTf9w2mks</string>
 </resources>
