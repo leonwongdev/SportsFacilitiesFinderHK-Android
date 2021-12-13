@@ -7,6 +7,7 @@
         <entry key="app/src/main/res/layout/activity_facilities_list_activity.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/layout/facilities_list_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/sports_type_button.xml" value="0.375" />
       </map>
     </option>
