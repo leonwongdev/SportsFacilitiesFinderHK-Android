@@ -75,12 +75,16 @@ public class SportFacility {
         return Html.fromHtml(remarks, Html.FROM_HTML_MODE_COMPACT).toString();
     }
 
-    public String getLongtitude() {
-        return longtitude;
+    public double getLongtitude() {
+        String[] dms = longtitude.split("-",0);
+        double lng = Double.parseDouble(dms[0]) + Double.parseDouble(dms[1])/60 + Double.parseDouble(dms[2])/3600;
+        return lng;
     }
 
-    public String getLatitude() {
-        return latitude;
+    public double getLatitude() {
+        String[] dms = latitude.split("-",0);
+        double lat = Double.parseDouble(dms[0]) + Double.parseDouble(dms[1])/60 + Double.parseDouble(dms[2])/3600;
+        return lat;
     }
 
     @Override
