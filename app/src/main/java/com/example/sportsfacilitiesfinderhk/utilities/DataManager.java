@@ -2,9 +2,17 @@ package com.example.sportsfacilitiesfinderhk.utilities;
 
 import com.example.sportsfacilitiesfinderhk.models.SportFacility;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DataManager {
+    static String[] sportTypes = {"Football","Basketball",
+            "Handball","Archery","Netball","Gateball","Cricket","Volleyball"};
+
+    public static String[] getSportTypes() {
+        return sportTypes;
+    }
+
     static List<SportFacility> handballCourts;
 
     public static List<SportFacility> getHandballCourts() {
@@ -24,6 +32,4 @@ public class DataManager {
     public static void setArcheryRanges(List<SportFacility> archeryRanges) {
         DataManager.archeryRanges = archeryRanges;
     }
-
-
 }

@@ -2,9 +2,14 @@ package com.example.sportsfacilitiesfinderhk.ui.facilitieslist;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sportsfacilitiesfinderhk.R;
+import com.example.sportsfacilitiesfinderhk.adapters.FacilitiesListAdapter;
 import com.example.sportsfacilitiesfinderhk.models.SportFacility;
 import com.example.sportsfacilitiesfinderhk.network.APIHelper;
 import com.example.sportsfacilitiesfinderhk.ui.MainActivity;
@@ -18,6 +23,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 
 import java.util.List;
@@ -28,6 +35,10 @@ import retrofit2.Response;
 
 public class FacilitiesListActivity extends FragmentActivity implements OnMapReadyCallback {
     GoogleMap map;
+    RecyclerView facilitiesRecView;
+    private static final int REQUEST_LOCATION_PERMISSION = 1;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,14 +49,37 @@ public class FacilitiesListActivity extends FragmentActivity implements OnMapRea
         if (mapFragment != null) {
             mapFragment.getMapAsync(this);
         }
-        AlertHelper.showErrorAlert(FacilitiesListActivity.this, DataManager.getArcheryRanges().toString());
+        facilitiesRecView = findViewById(R.id.facilities_list_recycler_view);
+        facilitiesRecView.setAdapter(new FacilitiesListAdapter(FacilitiesListActivity.this,
+                DataManager.getHandballCourts()));
+        facilitiesRecView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         map = googleMap;
-        LatLng hongKong = new LatLng(22.302711,114.177216);
-        map.addMarker(new MarkerOptions().position(hongKong).title("Hong Kong"));
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(hongKong,10.0f));
+        List<SportFacility> sportFacilities = DataManager.getHandballCourts();
+        for (SportFacility sportFacility: sportFacilities) {
+            LatLng marker = new LatLng(sportFacility.getLatitude(),sportFacility.getLongtitude());
+            map.addMarker(new MarkerOptions().position(marker).title(sportFacility.getName()));
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(marker,12.0f));
+        }
+        enableMyLocation(map);
+    }
+
+    /**
+     * Checks for location permissions, and requests them if they are missing.
+     * Otherwise, enables the location layer.
+     */
+    private void enableMyLocation(GoogleMap map) {
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            map.setMyLocationEnabled(true);
+        } else {
+            ActivityCompat.requestPermissions(this, new String[]
+                            {Manifest.permission.ACCESS_FINE_LOCATION},
+                    REQUEST_LOCATION_PERMISSION);
+        }
     }
 }

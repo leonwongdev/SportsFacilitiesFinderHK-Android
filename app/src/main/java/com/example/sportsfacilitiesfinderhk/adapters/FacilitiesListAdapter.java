@@ -12,25 +12,26 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sportsfacilitiesfinderhk.R;
-import com.example.sportsfacilitiesfinderhk.ui.facilitiesdetails.FacilitiesDetailsActivity;
+import com.example.sportsfacilitiesfinderhk.models.SportFacility;
 import com.example.sportsfacilitiesfinderhk.ui.facilitieslist.FacilitiesListActivity;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class SportsTypeRecViewAdapter extends RecyclerView.Adapter<SportsTypeRecViewAdapter.ViewHolder> {
+public class FacilitiesListAdapter extends RecyclerView.Adapter<FacilitiesListAdapter.ViewHolder> {
     Context context;
-    String[] sports;
+    List<SportFacility> sportFacilities;
 
-    public SportsTypeRecViewAdapter(Context context, String[] sports) {
+    public FacilitiesListAdapter(Context context, List<SportFacility> sportFacilities) {
         this.context = context;
-        this.sports = sports;
+        this.sportFacilities = sportFacilities;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.sports_type_button, parent,false);
+        View view = inflater.inflate(R.layout.facilities_list_item, parent,false);
         return new ViewHolder(view);
     }
 
@@ -40,15 +41,15 @@ public class SportsTypeRecViewAdapter extends RecyclerView.Adapter<SportsTypeRec
             @Override
             public void onClick(View v) {
                 //TODO: start activity
-                context.startActivity(new Intent(context, FacilitiesListActivity.class));
+//                context.startActivity(new Intent(context, FacilitiesListActivity.class));
             }
         });
-        holder.titleTextView.setText(sports[position]);
+        holder.titleTextView.setText(sportFacilities.get(position).getName());
     }
 
     @Override
     public int getItemCount() {
-        return sports.length;
+        return sportFacilities.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
@@ -57,8 +58,8 @@ public class SportsTypeRecViewAdapter extends RecyclerView.Adapter<SportsTypeRec
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            parentLayout = itemView.findViewById(R.id.sports_type_button_layout);
-            titleTextView = itemView.findViewById(R.id.sport_title_tv);
+            parentLayout = itemView.findViewById(R.id.facilities_list_item_layout);
+            titleTextView = itemView.findViewById(R.id.facilities_list_item_name);
         }
     }
 }
