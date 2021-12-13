@@ -50,7 +50,7 @@ public class SplashScreen extends AppCompatActivity {
 
             @Override
             public void onAnimationRepeat(Animator animation) {
-                if (responseCount == 2) {
+                if (responseCount > 1) {
                     lottieAnimationView.cancelAnimation();
                 }
             }
@@ -61,7 +61,7 @@ public class SplashScreen extends AppCompatActivity {
             return;
         }
         
-        APIHelper.sportsFacilitiesAPI().getArcheryRange().enqueue(new Callback<List<SportFacility>>() {
+        APIHelper.sportsFacilitiesAPI().getArcheryRanges().enqueue(new Callback<List<SportFacility>>() {
             @Override
             public void onResponse(Call<List<SportFacility>> call, Response<List<SportFacility>> response) {
                 if (!response.isSuccessful()) {
@@ -88,6 +88,168 @@ public class SplashScreen extends AppCompatActivity {
                     return;
                 }
                 DataManager.setHandballCourts(response.body());
+                responseCount++;
+            }
+
+            @Override
+            public void onFailure(Call<List<SportFacility>> call, Throwable t) {
+                AlertHelper.showErrorAlert(SplashScreen.this, "Error retrieving data. Please check your network.");
+            }
+        });
+
+        APIHelper.sportsFacilitiesAPI().getSkateboardGrounds1().enqueue(new Callback<List<SportFacility>>() {
+            @Override
+            public void onResponse(Call<List<SportFacility>> call, Response<List<SportFacility>> response) {
+                if (!response.isSuccessful()) {
+                    //HTTP status is not 200 to 300
+                    AlertHelper.showErrorAlert(SplashScreen.this, "Error retrieving data from DATA.GOV.HK.");
+                    return;
+                }
+                DataManager.setSkateboardGrounds1(response.body());
+                responseCount++;
+            }
+
+            @Override
+            public void onFailure(Call<List<SportFacility>> call, Throwable t) {
+                AlertHelper.showErrorAlert(SplashScreen.this, "Error retrieving data. Please check your network.");
+            }
+        });
+
+        APIHelper.sportsFacilitiesAPI().getSkateboardGrounds2().enqueue(new Callback<List<SportFacility>>() {
+            @Override
+            public void onResponse(Call<List<SportFacility>> call, Response<List<SportFacility>> response) {
+                if (!response.isSuccessful()) {
+                    //HTTP status is not 200 to 300
+                    AlertHelper.showErrorAlert(SplashScreen.this, "Error retrieving data from DATA.GOV.HK.");
+                    return;
+                }
+                DataManager.setSkateboardGrounds2(response.body());
+                responseCount++;
+            }
+
+            @Override
+            public void onFailure(Call<List<SportFacility>> call, Throwable t) {
+                AlertHelper.showErrorAlert(SplashScreen.this, "Error retrieving data. Please check your network.");
+            }
+        });
+
+        APIHelper.sportsFacilitiesAPI().getNetballCourts().enqueue(new Callback<List<SportFacility>>() {
+            @Override
+            public void onResponse(Call<List<SportFacility>> call, Response<List<SportFacility>> response) {
+                if (!response.isSuccessful()) {
+                    //HTTP status is not 200 to 300
+                    AlertHelper.showErrorAlert(SplashScreen.this, "Error retrieving data from DATA.GOV.HK.");
+                    return;
+                }
+                DataManager.setNetballCourts(response.body());
+                responseCount++;
+            }
+
+            @Override
+            public void onFailure(Call<List<SportFacility>> call, Throwable t) {
+                AlertHelper.showErrorAlert(SplashScreen.this, "Error retrieving data. Please check your network.");
+            }
+        });
+
+        APIHelper.sportsFacilitiesAPI().getBeachVolleyballCourts().enqueue(new Callback<List<SportFacility>>() {
+            @Override
+            public void onResponse(Call<List<SportFacility>> call, Response<List<SportFacility>> response) {
+                if (!response.isSuccessful()) {
+                    //HTTP status is not 200 to 300
+                    AlertHelper.showErrorAlert(SplashScreen.this, "Error retrieving data from DATA.GOV.HK.");
+                    return;
+                }
+                DataManager.setBeachVolleyballCourts(response.body());
+                responseCount++;
+            }
+
+            @Override
+            public void onFailure(Call<List<SportFacility>> call, Throwable t) {
+                AlertHelper.showErrorAlert(SplashScreen.this, "Error retrieving data. Please check your network.");
+            }
+        });
+
+        APIHelper.sportsFacilitiesAPI().getGateballCourts().enqueue(new Callback<List<SportFacility>>() {
+            @Override
+            public void onResponse(Call<List<SportFacility>> call, Response<List<SportFacility>> response) {
+                if (!response.isSuccessful()) {
+                    //HTTP status is not 200 to 300
+                    AlertHelper.showErrorAlert(SplashScreen.this, "Error retrieving data from DATA.GOV.HK.");
+                    return;
+                }
+                DataManager.setGateballCourts(response.body());
+                responseCount++;
+            }
+
+            @Override
+            public void onFailure(Call<List<SportFacility>> call, Throwable t) {
+                AlertHelper.showErrorAlert(SplashScreen.this, "Error retrieving data. Please check your network.");
+            }
+        });
+
+        APIHelper.sportsFacilitiesAPI().getRollerSkatingRinks().enqueue(new Callback<List<SportFacility>>() {
+            @Override
+            public void onResponse(Call<List<SportFacility>> call, Response<List<SportFacility>> response) {
+                if (!response.isSuccessful()) {
+                    //HTTP status is not 200 to 300
+                    AlertHelper.showErrorAlert(SplashScreen.this, "Error retrieving data from DATA.GOV.HK.");
+                    return;
+                }
+                DataManager.setRollerSkatingRinks(response.body());
+                responseCount++;
+            }
+
+            @Override
+            public void onFailure(Call<List<SportFacility>> call, Throwable t) {
+                AlertHelper.showErrorAlert(SplashScreen.this, "Error retrieving data. Please check your network.");
+            }
+        });
+
+        APIHelper.sportsFacilitiesAPI().getCricketGrounds1().enqueue(new Callback<List<SportFacility>>() {
+            @Override
+            public void onResponse(Call<List<SportFacility>> call, Response<List<SportFacility>> response) {
+                if (!response.isSuccessful()) {
+                    //HTTP status is not 200 to 300
+                    AlertHelper.showErrorAlert(SplashScreen.this, "Error retrieving data from DATA.GOV.HK.");
+                    return;
+                }
+                DataManager.setCricketGrounds1(response.body());
+                responseCount++;
+            }
+
+            @Override
+            public void onFailure(Call<List<SportFacility>> call, Throwable t) {
+                AlertHelper.showErrorAlert(SplashScreen.this, "Error retrieving data. Please check your network.");
+            }
+        });
+
+        APIHelper.sportsFacilitiesAPI().getCricketGrounds2().enqueue(new Callback<List<SportFacility>>() {
+            @Override
+            public void onResponse(Call<List<SportFacility>> call, Response<List<SportFacility>> response) {
+                if (!response.isSuccessful()) {
+                    //HTTP status is not 200 to 300
+                    AlertHelper.showErrorAlert(SplashScreen.this, "Error retrieving data from DATA.GOV.HK.");
+                    return;
+                }
+                DataManager.setCricketGrounds2(response.body());
+                responseCount++;
+            }
+
+            @Override
+            public void onFailure(Call<List<SportFacility>> call, Throwable t) {
+                AlertHelper.showErrorAlert(SplashScreen.this, "Error retrieving data. Please check your network.");
+            }
+        });
+
+        APIHelper.sportsFacilitiesAPI().getCricketGrounds3().enqueue(new Callback<List<SportFacility>>() {
+            @Override
+            public void onResponse(Call<List<SportFacility>> call, Response<List<SportFacility>> response) {
+                if (!response.isSuccessful()) {
+                    //HTTP status is not 200 to 300
+                    AlertHelper.showErrorAlert(SplashScreen.this, "Error retrieving data from DATA.GOV.HK.");
+                    return;
+                }
+                DataManager.setCricketGrounds3(response.body());
                 responseCount++;
             }
 

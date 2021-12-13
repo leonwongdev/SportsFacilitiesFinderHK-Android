@@ -26,6 +26,7 @@ public class FacilitiesDetailsActivity extends AppCompatActivity {
     TextView phone_num_tv;
     TextView opening_hours_tv;
     Button get_directions_button;
+
     int index;
 
     @Override

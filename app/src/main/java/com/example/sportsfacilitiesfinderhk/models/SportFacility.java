@@ -39,19 +39,21 @@ public class SportFacility {
     String latitude;
 
     public String getDistrict() {
-        return district;
+        return checkNull(district);
     }
 
     public String getName() {
+
+        name = Html.fromHtml(checkNull(name), Html.FROM_HTML_MODE_COMPACT).toString();
         return name;
     }
 
     public String getAddress() {
-        return address;
+        return checkNull(address);
     }
 
     public String getGIHS() {
-        return GIHS;
+        return checkNull(GIHS);
     }
 
     public String getNumCourts() {
@@ -62,21 +64,21 @@ public class SportFacility {
     }
 
     public String getAncillaryFacilities() {
-        ancillaryFacilities = Html.fromHtml(ancillaryFacilities, Html.FROM_HTML_MODE_COMPACT).toString();
+        ancillaryFacilities = Html.fromHtml(checkNull(ancillaryFacilities), Html.FROM_HTML_MODE_COMPACT).toString();
         return ancillaryFacilities;
     }
 
     public String getOpeningHours() {
-        openingHours = Html.fromHtml(openingHours, Html.FROM_HTML_MODE_COMPACT).toString();
+        openingHours = Html.fromHtml(checkNull(openingHours), Html.FROM_HTML_MODE_COMPACT).toString();
         return openingHours;
     }
 
     public String getPhone() {
-        return phone;
+        return checkNull(phone);
     }
 
     public String getRemarks() {
-        return Html.fromHtml(remarks, Html.FROM_HTML_MODE_COMPACT).toString();
+        return Html.fromHtml(checkNull(remarks), Html.FROM_HTML_MODE_COMPACT).toString();
     }
 
     public double getLongtitude() {
@@ -106,5 +108,13 @@ public class SportFacility {
                 ", longtitude='" + longtitude + '\'' +
                 ", latitude='" + latitude + '\'' +
                 '}';
+    }
+
+    private String checkNull(String input) {
+        if (input == null) {
+            return "N/A";
+        } else {
+            return input;
+        }
     }
 }

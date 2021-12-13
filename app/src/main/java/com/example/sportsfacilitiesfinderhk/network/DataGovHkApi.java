@@ -13,24 +13,33 @@ public interface DataGovHkApi {
     Call<List<SportFacility>> getHandballCourts();
 
     @GET("facility-nbc.json")
-    Call<List<SportFacility>> getNetBallCourts();
+    Call<List<SportFacility>> getNetballCourts();
 
     @GET("facility-sbg.json")
-    Call<List<SportFacility>> getSkateBoardCourts();
+    Call<List<SportFacility>> getSkateboardGrounds1();
+
+    @GET("facility-sp.json")
+    Call<List<SportFacility>> getSkateboardGrounds2();
 
     @GET("facility-ar.json")
-    Call<List<SportFacility>> getArcheryRange();
+    Call<List<SportFacility>> getArcheryRanges();
 
-    @GET("facility-hbc.json")
-    Call<List<SportFacility>> aaaa();
+    @GET("facility-bvbc.json")
+    Call<List<SportFacility>> getBeachVolleyballCourts();
 
-    @GET("facility-hbc.json")
-    Call<List<SportFacility>> as();
+    @GET("facility-rsr.json")
+    Call<List<SportFacility>> getRollerSkatingRinks();
 
-    @GET("facility-hbc.json")
-    Call<List<SportFacility>> asd();
+    @GET("facility-gbc.json")
+    Call<List<SportFacility>> getGateballCourts();
 
-    @GET("facility-hbc.json")
-    Call<List<SportFacility>> asdd();
+    @GET("facility-cgatp.json")
+    Call<List<SportFacility>> getCricketGrounds1();
+
+    @GET("facility-cgf.json")
+    Call<List<SportFacility>> getCricketGrounds2();
+
+    @GET("facility-cgntp.json")
+    Call<List<SportFacility>> getCricketGrounds3();
 
 }

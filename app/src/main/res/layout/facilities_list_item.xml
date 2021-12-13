@@ -1,39 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="90dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/facilities_list_item_layout">
+    android:id="@+id/facilities_list_item_layout"
+    android:layout_width="match_parent"
+    android:layout_height="90dp">
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_margin="5dp"
-        app:strokeWidth="1dp"
-        app:strokeColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        >
+        app:strokeColor="@color/black"
+        app:strokeWidth="1dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:background="#FFF">
 
             <TextView
                 android:id="@+id/facilities_list_item_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:text="TextView"
                 android:gravity="center"
+                android:text="TextView"
                 android:textColor="#0B3B8C"
-                android:textSize="25sp"
+                android:textSize="22sp"
                 app:autoSizeMaxTextSize="25sp"
-                app:autoSizeMinTextSize="1sp"
+                app:autoSizeMinTextSize="15sp"
                 app:autoSizeStepGranularity="2sp"
-                app:autoSizeTextType="uniform"
+                app:autoSizeTextType="none"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
