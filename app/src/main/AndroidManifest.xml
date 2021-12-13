@@ -13,6 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SportsFacilitiesFinderHK">
+        <activity android:name=".ui.facilitiesdetails.FacilitiesDetailsActivity"></activity>
         <activity
             android:name=".ui.direction.FacilityDirectionActivity"
             android:exported="false" />
@@ -29,6 +30,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".ui.MainActivity" />
 
         <meta-data
@@ -42,6 +44,7 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/map_key" />
+
     </application>
 
 </manifest>

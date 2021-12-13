@@ -12,6 +12,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sportsfacilitiesfinderhk.R;
+import com.example.sportsfacilitiesfinderhk.ui.facilitiesdetails.FacilitiesDetailsActivity;
 import com.example.sportsfacilitiesfinderhk.ui.facilitieslist.FacilitiesListActivity;
 
 import java.util.ArrayList;
@@ -39,7 +40,9 @@ public class SportsTypeRecViewAdapter extends RecyclerView.Adapter<SportsTypeRec
             @Override
             public void onClick(View v) {
                 //TODO: start activity
-                context.startActivity(new Intent(context, FacilitiesListActivity.class));
+                Intent intent = new Intent(context, FacilitiesListActivity.class);
+                intent.putExtra("sportsType", sports[position]);
+                context.startActivity(intent);
             }
         });
         holder.titleTextView.setText(sports[position]);
