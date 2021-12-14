@@ -104,7 +104,10 @@ public class FacilitiesDetailsActivity extends AppCompatActivity {
                     String newJson = gson.toJson(list);
                     prefsEditor.putString("bookmarks", newJson);
                     prefsEditor.commit();
-                    DataManager.setCurrentFacilityList(list);
+                    Boolean isBookmarkPage = getIntent().getBooleanExtra("isBookmarkPage",false);
+                    if (isBookmarkPage) {
+                        DataManager.setCurrentFacilityList(list);
+                    }
                     AlertHelper.showSimpleAlert(
                             FacilitiesDetailsActivity.this,
                             "Success",

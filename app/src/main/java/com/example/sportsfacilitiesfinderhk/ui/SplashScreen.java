@@ -53,7 +53,7 @@ public class SplashScreen extends AppCompatActivity {
 
             @Override
             public void onAnimationRepeat(Animator animation) {
-                if (responseCount >= 8) {
+                if (responseCount == 11) {
                     lottieAnimationView.cancelAnimation();
                 }
             }

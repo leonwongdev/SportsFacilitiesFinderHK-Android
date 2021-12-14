@@ -46,6 +46,7 @@ public class FacilitiesListAdapter extends RecyclerView.Adapter<FacilitiesListAd
             public void onClick(View v) {
                 Intent intent = new Intent(context, FacilitiesDetailsActivity.class);
                 intent.putExtra("index", position);
+                intent.putExtra("isBookmarkPage", isBookmarkPage);
                 context.startActivity(intent);
             }
         });

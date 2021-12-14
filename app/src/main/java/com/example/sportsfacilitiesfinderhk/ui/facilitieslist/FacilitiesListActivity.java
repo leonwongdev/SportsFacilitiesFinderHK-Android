@@ -111,6 +111,8 @@ public class FacilitiesListActivity extends FragmentActivity implements OnMapRea
                     if(marker.getTitle().equals(DataManager.getCurrentFacilityList().get(i).getName())){
                         Intent intent = new Intent(FacilitiesListActivity.this, FacilitiesDetailsActivity.class);
                         intent.putExtra("index", i);
+                        Boolean isBookmarkPage = getIntent().getBooleanExtra("isBookmarkPage",false);
+                        intent.putExtra("isBookmarkPage", isBookmarkPage);
                         startActivity(intent);
                     }
                 }
