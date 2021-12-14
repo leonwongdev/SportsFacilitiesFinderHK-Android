@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.sportsfacilitiesfinderhk.R;
 import com.example.sportsfacilitiesfinderhk.ui.facilitiesdetails.FacilitiesDetailsActivity;
 import com.example.sportsfacilitiesfinderhk.ui.facilitieslist.FacilitiesListActivity;
+import com.example.sportsfacilitiesfinderhk.utilities.DataManager;
 
 import java.util.ArrayList;
 
@@ -47,6 +49,7 @@ public class SportsTypeRecViewAdapter extends RecyclerView.Adapter<SportsTypeRec
             }
         });
         holder.titleTextView.setText(sports[position]);
+        holder.icon.setImageResource(DataManager.getIconID()[position]);
     }
 
     @Override
@@ -57,11 +60,13 @@ public class SportsTypeRecViewAdapter extends RecyclerView.Adapter<SportsTypeRec
     public class ViewHolder extends RecyclerView.ViewHolder{
         ConstraintLayout parentLayout;
         TextView titleTextView;
+        ImageView icon;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             parentLayout = itemView.findViewById(R.id.sports_type_button_layout);
             titleTextView = itemView.findViewById(R.id.sport_title_tv);
+            icon = itemView.findViewById(R.id.sports_type_button_banner);
         }
     }
 }

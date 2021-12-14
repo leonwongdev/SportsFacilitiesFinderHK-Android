@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         SportsTypeRecViewAdapter sportsTypeRecViewAdapter = new SportsTypeRecViewAdapter(this, DataManager.getSportTypes());
         sportsTypeRecView.setAdapter(sportsTypeRecViewAdapter);
         sportsTypeRecView.setLayoutManager(new GridLayoutManager(this,2));
-        sportsTypeRecView.addItemDecoration(new GridSpacingItemDecoration(2,50,true));
+        sportsTypeRecView.addItemDecoration(new GridSpacingItemDecoration(2,25,true));
         sportsTypeRecView.setVisibility(View.GONE);
 
         bookmarkButton = findViewById(R.id.bookmark_button);
