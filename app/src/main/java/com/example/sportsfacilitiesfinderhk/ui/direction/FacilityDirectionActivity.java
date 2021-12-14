@@ -146,7 +146,7 @@ public class FacilityDirectionActivity extends FragmentActivity implements OnMap
                         ));
                     }
                     Polyline polyline = map.addPolyline(new PolylineOptions().addAll(newDecodedPath));
-                    polyline.setColor(ContextCompat.getColor(FacilityDirectionActivity.this, R.color.gray));
+                    polyline.setColor(ContextCompat.getColor(FacilityDirectionActivity.this, R.color.black));
                     polyline.setClickable(true);
 
                     double tempDuration = route.legs[0].duration.inSeconds;
@@ -227,7 +227,7 @@ public class FacilityDirectionActivity extends FragmentActivity implements OnMap
                     prevMarker.showInfoWindow();
                 }
             } else {
-                routeData.getPolyline().setColor(ContextCompat.getColor(FacilityDirectionActivity.this, R.color.gray));
+                routeData.getPolyline().setColor(ContextCompat.getColor(FacilityDirectionActivity.this, R.color.black));
                 routeData.getPolyline().setZIndex(0);
             }
         }
