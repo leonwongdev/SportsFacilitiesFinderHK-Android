@@ -1,18 +1,6 @@
 package com.example.sportsfacilitiesfinderhk.ui;
 
 
-import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
-import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
-import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.espresso.matcher.ViewMatchers.withParent;
-import static androidx.test.espresso.matcher.ViewMatchers.withText;
-import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.is;
-
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
@@ -33,9 +21,22 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
+import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withParent;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.is;
+
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class ArcheryDataTest {
+public class FacilitiesListUITest {
 
     @Rule
     public ActivityTestRule<SplashScreen> mActivityTestRule = new ActivityTestRule<>(SplashScreen.class);
@@ -46,7 +47,7 @@ public class ArcheryDataTest {
                     "android.permission.ACCESS_FINE_LOCATION");
 
     @Test
-    public void archeryDataTest() {
+    public void FacilitiesListTest() {
         try {
             //Wait for downloading data
             Thread.sleep(5000);
@@ -59,6 +60,18 @@ public class ArcheryDataTest {
                                 withClassName(is("androidx.constraintlayout.widget.ConstraintLayout")),
                                 1)));
         recyclerView.perform(actionOnItemAtPosition(0, click()));
+
+        ViewInteraction view = onView(
+                allOf(withContentDescription("Google Map"),
+                        withParent(withParent(withId(R.id.facilities_map_fragment))),
+                        isDisplayed()));
+        view.check(matches(isDisplayed()));
+
+        ViewInteraction imageView = onView(
+                allOf(withContentDescription("My Location"),
+                        withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.FrameLayout.class))),
+                        isDisplayed()));
+        imageView.check(matches(isDisplayed()));
 
         ViewInteraction textView = onView(
                 allOf(withId(R.id.facilities_list_item_name), withText("Tuen Mun Recreation and Sports Centre Archery Range"),

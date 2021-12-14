@@ -106,7 +106,7 @@ public class FacilitiesDetailsActivity extends AppCompatActivity {
                 AlertHelper.showSimpleAlert(
                         FacilitiesDetailsActivity.this,
                         "Success",
-                        "Bookmarked " + currSportFac.getName() + "! You can view bookmarked item by clicking the Bookmark button on home page!"
+                        "Bookmarked " + currSportFac.getName() + "! You can view the bookmarked item by clicking the Bookmarks button on the home page!"
                 );
                 add_bookmark_button.setText("Bookmarked");
                 add_bookmark_button.setBackgroundColor(getResources().getColor(R.color.gray,null));

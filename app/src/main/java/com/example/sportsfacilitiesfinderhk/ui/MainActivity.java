@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
                         .getDefaultSharedPreferences(MainActivity.this.getApplicationContext());
                 String json = appSharedPrefs.getString("bookmarks", "");
                 if (json.equals("")) {
-                    AlertHelper.showErrorAlert(MainActivity.this, "No Bookmarked Sport Facilities. Try adding one to the bookmark!");
+                    AlertHelper.showErrorAlert(MainActivity.this, "No Bookmarked Sports Facilities. Try adding one to the bookmark!");
                 } else {
                     Intent intent = new Intent(MainActivity.this, FacilitiesListActivity.class);
                     intent.putExtra("sportsType", "bookmark");
