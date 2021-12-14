@@ -1,13 +1,16 @@
 package com.example.sportsfacilitiesfinderhk.utilities;
 
 import com.example.sportsfacilitiesfinderhk.models.SportFacility;
-
+import com.example.sportsfacilitiesfinderhk.R;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DataManager {
     static String[] sportTypes = {"Archery","Beach Volleyball",
             "Cricket","Gateball","Handball","Netball","Roller Skating","Skateboarding"};
+
+    static final int[] btns = {R.drawable.archery, R.drawable.beach_volleyball, R.drawable.cricket, R.drawable.gateball,
+        R.drawable.handball, R.drawable.netball, R.drawable.roller_skating, R.drawable.skateboarding};
 
     static List<SportFacility> currentFacilityList;
     static List<SportFacility> handballCourts;
@@ -148,5 +151,9 @@ public class DataManager {
             sportFac.setType(type);
         }
         return sportFacilityList;
+    }
+
+    public static int[] getIconID() {
+        return btns;
     }
 }
