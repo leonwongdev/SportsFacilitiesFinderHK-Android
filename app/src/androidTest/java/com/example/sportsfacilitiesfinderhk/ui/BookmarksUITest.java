@@ -124,7 +124,7 @@ public class BookmarksUITest {
         materialButton2.perform(scrollTo(), click());
 
         ViewInteraction button2 = onView(
-                allOf(withId(R.id.add_bookmark), withText("BOOKMARKED"),
+                allOf(withId(R.id.add_bookmark), withText("REMOVE BOOKMARK"),
                         withParent(withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class))),
                         isDisplayed()));
         button2.check(matches(isDisplayed()));
@@ -175,7 +175,7 @@ public class BookmarksUITest {
         textView5.check(matches(withText("Tuen Mun Recreation and Sports Centre Archery Range")));
 
         ViewInteraction button3 = onView(
-                allOf(withId(R.id.add_bookmark), withText("BOOKMARKED"),
+                allOf(withId(R.id.add_bookmark), withText("REMOVE BOOKMARK"),
                         withParent(withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class))),
                         isDisplayed()));
         button3.check(matches(isDisplayed()));

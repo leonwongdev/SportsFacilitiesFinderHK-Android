@@ -115,7 +115,7 @@ public class FacilitiesDetailsActivity extends AppCompatActivity {
                     return;
                 }
 
-                if (!oldJson.equals("") || !oldJson.equals("[]")) {
+                if (!oldJson.equals("") && !oldJson.equals("[]")) {
                     //Bookmark list already exist in SP
                     //Retrieve old bookmarks
                     List<SportFacility> oldSportFacilityList = gson.fromJson(oldJson, new TypeToken<List<SportFacility>>(){}.getType());
