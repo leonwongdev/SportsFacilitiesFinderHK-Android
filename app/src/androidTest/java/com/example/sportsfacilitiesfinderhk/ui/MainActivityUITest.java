@@ -6,7 +6,9 @@ package com.example.sportsfacilitiesfinderhk.ui;
 
 import android.view.View;
 
+import androidx.test.espresso.ViewAction;
 import androidx.test.espresso.ViewInteraction;
+import androidx.test.espresso.action.ViewActions;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.rule.GrantPermissionRule;
@@ -82,6 +84,8 @@ public class MainActivityUITest {
                         withParent(withParent(IsInstanceOf.<View>instanceOf(androidx.cardview.widget.CardView.class))),
                         isDisplayed()));
         textView6.check(matches(withText("Netball")));
+
+        ViewInteraction sportTypeRecView = onView(withId(R.id.sports_type_rec_view)).perform(ViewActions.swipeUp());
 
         ViewInteraction textView7 = onView(
                 allOf(withId(R.id.sport_title_tv), withText("Roller Skating"),
