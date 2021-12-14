@@ -90,7 +90,32 @@ public class FacilitiesDetailsActivity extends AppCompatActivity {
                 SharedPreferences.Editor prefsEditor = appSharedPrefs.edit();
                 String oldJson = appSharedPrefs.getString("bookmarks", "");
                 Gson gson = new Gson();
-                if (!oldJson.equals("")) {
+
+                if(add_bookmark_button.getText().equals("Remove Bookmark")) {
+                    List<SportFacility> list = gson.fromJson(oldJson, new TypeToken<List<SportFacility>>(){}.getType());
+                    SportFacility sportFacToDel = null;
+                    for (SportFacility sportFac:
+                         list) {
+                        if (currSportFac.getName().equals(sportFac.getName()) && currSportFac.getType().equals(sportFac.getType())) {
+                            sportFacToDel = sportFac;
+                        }
+                    }
+                    list.remove(sportFacToDel);
+                    String newJson = gson.toJson(list);
+                    prefsEditor.putString("bookmarks", newJson);
+                    prefsEditor.commit();
+                    DataManager.setCurrentFacilityList(list);
+                    AlertHelper.showSimpleAlert(
+                            FacilitiesDetailsActivity.this,
+                            "Success",
+                            "Removed " + currSportFac.getName() + " from bookmark."
+                    );
+                    add_bookmark_button.setText("Add Bookmark");
+                    add_bookmark_button.setBackgroundColor(getResources().getColor(R.color.bookmark_green,null));
+                    return;
+                }
+
+                if (!oldJson.equals("") || !oldJson.equals("[]")) {
                     //Bookmark list already exist in SP
                     //Retrieve old bookmarks
                     List<SportFacility> oldSportFacilityList = gson.fromJson(oldJson, new TypeToken<List<SportFacility>>(){}.getType());
@@ -111,9 +136,8 @@ public class FacilitiesDetailsActivity extends AppCompatActivity {
                         "Success",
                         "Bookmarked " + currSportFac.getName() + "! You can view the bookmarked item by clicking the Bookmarks button on the home page!"
                 );
-                add_bookmark_button.setText("Bookmarked");
-                add_bookmark_button.setBackgroundColor(getResources().getColor(R.color.gray,null));
-                add_bookmark_button.setClickable(false);
+                add_bookmark_button.setText("Remove Bookmark");
+                add_bookmark_button.setBackgroundColor(getResources().getColor(R.color.red,null));
             }
         });
 
@@ -133,9 +157,8 @@ public class FacilitiesDetailsActivity extends AppCompatActivity {
                     oldSportFacilityList) {
                 if (currSportFac.getName().equals(sportFacility.getName()) && currSportFac.getType().equals(sportFacility.getType())) {
                     //Disable button if there it is already bookmakred
-                    add_bookmark_button.setText("Bookmarked");
-                    add_bookmark_button.setBackgroundColor(getResources().getColor(R.color.gray,null));
-                    add_bookmark_button.setClickable(false);
+                    add_bookmark_button.setText("Remove Bookmark");
+                    add_bookmark_button.setBackgroundColor(getResources().getColor(R.color.red,null));
                 }
             }
         }

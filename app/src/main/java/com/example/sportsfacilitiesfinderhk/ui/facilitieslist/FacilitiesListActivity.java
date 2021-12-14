@@ -55,6 +55,7 @@ import retrofit2.Response;
 public class FacilitiesListActivity extends FragmentActivity implements OnMapReadyCallback {
     GoogleMap map;
     RecyclerView facilitiesRecView;
+    FacilitiesListAdapter facilitiesListAdapter;
     private static final int REQUEST_LOCATION_PERMISSION = 1;
     FusedLocationProviderClient fusedLocationProviderClient;
 
@@ -71,11 +72,26 @@ public class FacilitiesListActivity extends FragmentActivity implements OnMapRea
 
         Boolean isBookmarkPage = getIntent().getBooleanExtra("isBookmarkPage",false);
         facilitiesRecView = findViewById(R.id.facilities_list_recycler_view);
-        facilitiesRecView.setAdapter(new FacilitiesListAdapter(FacilitiesListActivity.this,
-                getFacilityType(),isBookmarkPage));
+        facilitiesListAdapter = new FacilitiesListAdapter(FacilitiesListActivity.this,
+                getFacilityType(),isBookmarkPage);
+        facilitiesRecView.setAdapter(facilitiesListAdapter);
         facilitiesRecView.setLayoutManager(new LinearLayoutManager(this));
 
         setUpLocationService();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        facilitiesListAdapter.setSportFacilities(DataManager.getCurrentFacilityList());
+        if (map != null) {
+            map.clear();
+            List<SportFacility> sportFacilities = DataManager.getCurrentFacilityList();
+            for (int i = 0; i < sportFacilities.size(); i++) {
+                LatLng marker = new LatLng(sportFacilities.get(i).getLatitude(),sportFacilities.get(i).getLongtitude());
+                map.addMarker(new MarkerOptions().position(marker).title(sportFacilities.get(i).getName()));
+            }
+        }
     }
 
     @Override
@@ -91,8 +107,8 @@ public class FacilitiesListActivity extends FragmentActivity implements OnMapRea
         map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(@NonNull Marker marker) {
-                for (int i = 0; i < sportFacilities.size(); i++) {
-                    if(marker.getTitle().equals(sportFacilities.get(i).getName())){
+                for (int i = 0; i < DataManager.getCurrentFacilityList().size(); i++) {
+                    if(marker.getTitle().equals(DataManager.getCurrentFacilityList().get(i).getName())){
                         Intent intent = new Intent(FacilitiesListActivity.this, FacilitiesDetailsActivity.class);
                         intent.putExtra("index", i);
                         startActivity(intent);

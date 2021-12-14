@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
                 SharedPreferences appSharedPrefs = PreferenceManager
                         .getDefaultSharedPreferences(MainActivity.this.getApplicationContext());
                 String json = appSharedPrefs.getString("bookmarks", "");
-                if (json.equals("")) {
+                if (json.equals("") || json.equals("[]")) {
                     AlertHelper.showErrorAlert(MainActivity.this, "No Bookmarked Sports Facilities. Try adding one to the bookmark!");
                 } else {
                     Intent intent = new Intent(MainActivity.this, FacilitiesListActivity.class);

@@ -59,6 +59,11 @@ public class FacilitiesListAdapter extends RecyclerView.Adapter<FacilitiesListAd
         return sportFacilities.size();
     }
 
+    public void setSportFacilities(List<SportFacility> list) {
+        this.sportFacilities = list;
+        notifyDataSetChanged();
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder{
         ConstraintLayout parentLayout;
         TextView titleTextView;

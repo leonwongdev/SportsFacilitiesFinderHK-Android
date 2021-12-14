@@ -74,7 +74,7 @@
                     <Button
                         android:id="@+id/get_directions_button"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_weight="50"
                         android:layout_margin="5dp"
                         android:backgroundTint="#295481"
