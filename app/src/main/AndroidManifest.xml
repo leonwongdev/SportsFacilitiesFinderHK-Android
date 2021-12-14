@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--# COMP 4521    #  TO, Kai Yuen 20410782 kytoac@connect.ust.hk-->
+<!--# COMP 4521    #  WONG, Lap Wong 20602036 lwwongaf@connect.ust.hk-->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.sportsfacilitiesfinderhk">
 
