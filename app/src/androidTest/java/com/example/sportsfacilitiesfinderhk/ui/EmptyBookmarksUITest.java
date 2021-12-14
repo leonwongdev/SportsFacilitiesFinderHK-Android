@@ -7,10 +7,15 @@ package com.example.sportsfacilitiesfinderhk.ui;
 import androidx.test.espresso.DataInteraction;
 import androidx.test.espresso.ViewInteraction;
 import androidx.test.filters.LargeTest;
+import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.rule.GrantPermissionRule;
 import androidx.test.runner.AndroidJUnit4;
 
+import android.app.Instrumentation;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
@@ -25,6 +30,7 @@ import static androidx.test.espresso.assertion.ViewAssertions.*;
 import static androidx.test.espresso.matcher.ViewMatchers.*;
 
 import com.example.sportsfacilitiesfinderhk.R;
+import com.example.sportsfacilitiesfinderhk.ui.facilitiesdetails.FacilitiesDetailsActivity;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
@@ -58,6 +64,14 @@ public class EmptyBookmarksUITest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        Context context = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        SharedPreferences appSharedPrefs = PreferenceManager
+                .getDefaultSharedPreferences(context);
+        SharedPreferences.Editor prefsEditor = appSharedPrefs.edit();
+        prefsEditor.clear();
+        prefsEditor.commit();
+
         ViewInteraction materialButton = onView(
                 allOf(withId(R.id.bookmark_button), withText("Bookmarks"),
                         childAtPosition(

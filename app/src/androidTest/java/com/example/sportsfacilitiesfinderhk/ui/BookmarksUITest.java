@@ -4,12 +4,16 @@
 package com.example.sportsfacilitiesfinderhk.ui;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 
 import androidx.test.espresso.ViewInteraction;
 import androidx.test.filters.LargeTest;
+import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.rule.GrantPermissionRule;
 import androidx.test.runner.AndroidJUnit4;
@@ -59,6 +63,14 @@ public class BookmarksUITest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        Context context = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        SharedPreferences appSharedPrefs = PreferenceManager
+                .getDefaultSharedPreferences(context);
+        SharedPreferences.Editor prefsEditor = appSharedPrefs.edit();
+        prefsEditor.clear();
+        prefsEditor.commit();
+
         ViewInteraction recyclerView = onView(
                 allOf(withId(R.id.sports_type_rec_view),
                         childAtPosition(
