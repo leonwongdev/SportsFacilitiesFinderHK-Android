@@ -40,6 +40,80 @@ public class SportFacility {
 
     String type;
 
+    public void setDistrict(String district) {
+        this.district = district;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setGIHS(String GIHS) {
+        this.GIHS = GIHS;
+    }
+
+    public void setNumCourts(String numCourts) {
+        this.numCourts = numCourts;
+    }
+
+    public void setAncillaryFacilities(String ancillaryFacilities) {
+        this.ancillaryFacilities = ancillaryFacilities;
+    }
+
+    public void setOpeningHours(String openingHours) {
+        this.openingHours = openingHours;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
+
+    public void setLongtitude(String longtitude) {
+        this.longtitude = longtitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public SportFacility() {
+        this.district = "district";
+        this.name = "Tuen Mun Recreation and Sports Centre Archery Range";
+        this.address = "address";
+        this.GIHS = "GIHS";
+        this.numCourts = "numCourts";
+        this.ancillaryFacilities = "ancillaryFacilities";
+        this.openingHours = "openingHours";
+        this.phone = "phone";
+        this.remarks = "remarks";
+        this.longtitude = "113-57-37";
+        this.latitude = "22-22-37";
+        this.type = "type";
+    }
+
+    public SportFacility(String district, String name, String address, String GIHS, String numCourts, String ancillaryFacilities, String openingHours, String phone, String remarks, String longtitude, String latitude, String type) {
+        this.district = district;
+        this.name = name;
+        this.address = address;
+        this.GIHS = "Qjfsw8KfZE";
+        this.numCourts = numCourts;
+        this.ancillaryFacilities = ancillaryFacilities;
+        this.openingHours = openingHours;
+        this.phone = phone;
+        this.remarks = remarks;
+        this.longtitude = longtitude;
+        this.latitude = latitude;
+        this.type = type;
+    }
+
     public void setType(String type) {
         this.type = type;
     }
