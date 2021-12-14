@@ -20,10 +20,12 @@ import java.util.List;
 public class FacilitiesListAdapter extends RecyclerView.Adapter<FacilitiesListAdapter.ViewHolder> {
     Context context;
     List<SportFacility> sportFacilities;
+    Boolean isBookmarkPage;
 
-    public FacilitiesListAdapter(Context context, List<SportFacility> sportFacilities) {
+    public FacilitiesListAdapter(Context context, List<SportFacility> sportFacilities, Boolean isBookmarkPage) {
         this.context = context;
         this.sportFacilities = sportFacilities;
+        this.isBookmarkPage = isBookmarkPage;
     }
 
     @NonNull
@@ -44,7 +46,9 @@ public class FacilitiesListAdapter extends RecyclerView.Adapter<FacilitiesListAd
                 context.startActivity(intent);
             }
         });
-        holder.titleTextView.setText(sportFacilities.get(position).getName());
+        SportFacility currSportFac = sportFacilities.get(position);
+        String name = isBookmarkPage ? currSportFac.getName()+"("+currSportFac.getType()+")" : currSportFac.getName();
+        holder.titleTextView.setText(name);
     }
 
     @Override

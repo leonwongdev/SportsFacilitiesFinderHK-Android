@@ -28,12 +28,16 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import java.util.LinkedHashSet;
@@ -60,9 +64,11 @@ public class FacilitiesListActivity extends FragmentActivity implements OnMapRea
         if (mapFragment != null) {
             mapFragment.getMapAsync(this);
         }
+
+        Boolean isBookmarkPage = getIntent().getBooleanExtra("isBookmarkPage",false);
         facilitiesRecView = findViewById(R.id.facilities_list_recycler_view);
         facilitiesRecView.setAdapter(new FacilitiesListAdapter(FacilitiesListActivity.this,
-                getFacilityType()));
+                getFacilityType(),isBookmarkPage));
         facilitiesRecView.setLayoutManager(new LinearLayoutManager(this));
 
         setUpLocationService();
@@ -109,7 +115,7 @@ public class FacilitiesListActivity extends FragmentActivity implements OnMapRea
                     Location location = task.getResult();
                     if (location != null) {
                         LatLng latlng = new LatLng(location.getLatitude(),location.getLongitude());
-                        map.moveCamera(CameraUpdateFactory.newLatLngZoom(latlng,11.0f));
+                        map.moveCamera(CameraUpdateFactory.newLatLngZoom(latlng,10.0f));
                     }
                 }
             }
@@ -166,12 +172,15 @@ public class FacilitiesListActivity extends FragmentActivity implements OnMapRea
                 DataManager.setCurrentFacilityList(skateboardList);
                 DataManager.setCurrentFacilityList(DataManager.getSkateboardGrounds());
                 break;
-
+            case "bookmark":
+                SharedPreferences appSharedPrefs = PreferenceManager
+                        .getDefaultSharedPreferences(FacilitiesListActivity.this.getApplicationContext());
+                String json = appSharedPrefs.getString("bookmarks", "");
+                Gson gson = new Gson();
+                List<SportFacility> sportFacilityList = gson.fromJson(json, new TypeToken<List<SportFacility>>(){}.getType());
+                DataManager.setCurrentFacilityList(sportFacilityList);
         }
-
         return DataManager.getCurrentFacilityList();
-
-
     }
 
     /**

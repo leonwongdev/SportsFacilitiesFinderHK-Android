@@ -4,15 +4,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.sportsfacilitiesfinderhk.R;
 import com.example.sportsfacilitiesfinderhk.models.SportFacility;
 import com.example.sportsfacilitiesfinderhk.ui.direction.FacilityDirectionActivity;
+import com.example.sportsfacilitiesfinderhk.utilities.AlertHelper;
 import com.example.sportsfacilitiesfinderhk.utilities.DataManager;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FacilitiesDetailsActivity extends AppCompatActivity {
@@ -26,6 +32,7 @@ public class FacilitiesDetailsActivity extends AppCompatActivity {
     TextView phone_num_tv;
     TextView opening_hours_tv;
     Button get_directions_button;
+    Button add_bookmark_button;
 
     int index;
 
@@ -69,6 +76,66 @@ public class FacilitiesDetailsActivity extends AppCompatActivity {
             }
         });
 
+        add_bookmark_button = findViewById(R.id.add_bookmark);
+        add_bookmark_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SportFacility currSportFac = sportsFacility.get(index);
 
+                SharedPreferences appSharedPrefs = PreferenceManager
+                        .getDefaultSharedPreferences(FacilitiesDetailsActivity.this.getApplicationContext());
+                SharedPreferences.Editor prefsEditor = appSharedPrefs.edit();
+                String oldJson = appSharedPrefs.getString("bookmarks", "");
+                Gson gson = new Gson();
+                if (!oldJson.equals("")) {
+                    //Bookmark list already exist in SP
+                    //Retrieve old bookmarks
+                    List<SportFacility> oldSportFacilityList = gson.fromJson(oldJson, new TypeToken<List<SportFacility>>(){}.getType());
+                    oldSportFacilityList.add(currSportFac);
+                    String newJson = gson.toJson(oldSportFacilityList);
+                    prefsEditor.putString("bookmarks", newJson);
+                    prefsEditor.commit();
+                } else {
+                    //Bookmark list does not exist in SP
+                    List<SportFacility> newSportFacilityList = new ArrayList<>();
+                    newSportFacilityList.add(currSportFac);
+                    String newJson = gson.toJson(newSportFacilityList);
+                    prefsEditor.putString("bookmarks",newJson);
+                    prefsEditor.commit();
+                }
+                AlertHelper.showSimpleAlert(
+                        FacilitiesDetailsActivity.this,
+                        "Success",
+                        "Bookmarked " + currSportFac.getName() + "! You can view bookmarked item by clicking the Bookmark button on home page!"
+                );
+                add_bookmark_button.setText("Bookmarked");
+                add_bookmark_button.setBackgroundColor(getResources().getColor(R.color.gray,null));
+                add_bookmark_button.setClickable(false);
+            }
+        });
+
+        //Check if already bookmarked
+        SportFacility currSportFac = sportsFacility.get(index);
+        SharedPreferences appSharedPrefs = PreferenceManager
+                .getDefaultSharedPreferences(FacilitiesDetailsActivity.this.getApplicationContext());
+        String oldJson = appSharedPrefs.getString("bookmarks", "");
+        if (oldJson.equals("")) {
+            //No bookmark
+            //Do nothing
+        } else {
+            //If there is bookmark check if current sport fac has already bookmarked
+            Gson gson = new Gson();
+            List<SportFacility> oldSportFacilityList = gson.fromJson(oldJson, new TypeToken<List<SportFacility>>(){}.getType());
+            for (SportFacility sportFacility:
+                    oldSportFacilityList) {
+                if (currSportFac.getName().equals(sportFacility.getName()) && currSportFac.getType().equals(sportFacility.getType())) {
+                    //Disable button if there it is already bookmakred
+                    add_bookmark_button.setText("Bookmarked");
+                    add_bookmark_button.setBackgroundColor(getResources().getColor(R.color.gray,null));
+                    add_bookmark_button.setClickable(false);
+                }
+            }
+        }
     }
+
 }

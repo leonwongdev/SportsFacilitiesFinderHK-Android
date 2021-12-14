@@ -20,4 +20,17 @@ public class AlertHelper {
                 });
         alertDialog.show();
     }
+
+    public static void showSimpleAlert(Context context,String title, String errorMsg) {
+        AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+        alertDialog.setTitle(title);
+        alertDialog.setMessage(errorMsg);
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
+    }
 }

@@ -42,6 +42,7 @@ public class SportsTypeRecViewAdapter extends RecyclerView.Adapter<SportsTypeRec
                 //TODO: start activity
                 Intent intent = new Intent(context, FacilitiesListActivity.class);
                 intent.putExtra("sportsType", sports[position]);
+                intent.putExtra("isBookmarkPage", false);
                 context.startActivity(intent);
             }
         });

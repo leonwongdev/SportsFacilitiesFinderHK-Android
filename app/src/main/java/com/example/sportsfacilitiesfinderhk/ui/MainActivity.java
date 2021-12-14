@@ -11,23 +11,29 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.sportsfacilitiesfinderhk.R;
 import com.example.sportsfacilitiesfinderhk.adapters.SportsTypeRecViewAdapter;
 import com.example.sportsfacilitiesfinderhk.models.SportFacility;
 import com.example.sportsfacilitiesfinderhk.network.APIHelper;
+import com.example.sportsfacilitiesfinderhk.ui.facilitieslist.FacilitiesListActivity;
 import com.example.sportsfacilitiesfinderhk.utilities.AlertHelper;
 import com.example.sportsfacilitiesfinderhk.utilities.Constants;
 import com.example.sportsfacilitiesfinderhk.utilities.DataManager;
 import com.example.sportsfacilitiesfinderhk.utilities.GridSpacingItemDecoration;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +45,7 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
     RecyclerView sportsTypeRecView;
     ArrayList<String> sports = new ArrayList<String>();
+    Button bookmarkButton;
     boolean mLocationPermissionGranted = false;
 
     @Override
@@ -51,6 +58,25 @@ public class MainActivity extends AppCompatActivity {
         sportsTypeRecView.setLayoutManager(new GridLayoutManager(this,2));
         sportsTypeRecView.addItemDecoration(new GridSpacingItemDecoration(2,50,true));
         sportsTypeRecView.setVisibility(View.GONE);
+
+        bookmarkButton = findViewById(R.id.bookmark_button);
+        bookmarkButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Gson gson = new Gson();
+                SharedPreferences appSharedPrefs = PreferenceManager
+                        .getDefaultSharedPreferences(MainActivity.this.getApplicationContext());
+                String json = appSharedPrefs.getString("bookmarks", "");
+                if (json.equals("")) {
+                    AlertHelper.showErrorAlert(MainActivity.this, "No Bookmarked Sport Facilities. Try adding one to the bookmark!");
+                } else {
+                    Intent intent = new Intent(MainActivity.this, FacilitiesListActivity.class);
+                    intent.putExtra("sportsType", "bookmark");
+                    intent.putExtra("isBookmarkPage", true);
+                    MainActivity.this.startActivity(intent);
+                }
+            }
+        });
     }
 
     @Override

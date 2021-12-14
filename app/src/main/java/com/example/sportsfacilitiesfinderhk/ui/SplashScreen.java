@@ -50,7 +50,7 @@ public class SplashScreen extends AppCompatActivity {
 
             @Override
             public void onAnimationRepeat(Animator animation) {
-                if (responseCount > 1) {
+                if (responseCount >= 8) {
                     lottieAnimationView.cancelAnimation();
                 }
             }

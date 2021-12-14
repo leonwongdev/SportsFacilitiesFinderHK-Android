@@ -38,6 +38,16 @@ public class SportFacility {
     @SerializedName("Latitude")
     String latitude;
 
+    String type;
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getType() {
+        return type;
+    }
+
     public String getDistrict() {
         return checkNull(district);
     }

@@ -41,6 +41,7 @@ public class DataManager {
     }
 
     public static void setHandballCourts(List<SportFacility> handballCourts) {
+        handballCourts = setType(handballCourts,"Handball");
         DataManager.handballCourts = handballCourts;
     }
 
@@ -49,7 +50,8 @@ public class DataManager {
     }
 
     public static void setArcheryRanges(List<SportFacility> archeryRanges) {
-        DataManager.archeryRanges = archeryRanges;
+
+        DataManager.archeryRanges = setType(archeryRanges,"Archery");
     }
 
     public static List<SportFacility> getSkateboardGrounds() {
@@ -57,7 +59,7 @@ public class DataManager {
     }
 
     public static void setSkateboardGrounds(List<SportFacility> skateboardGrounds) {
-        DataManager.skateboardGrounds = skateboardGrounds;
+        DataManager.skateboardGrounds = setType(skateboardGrounds,"Skateboarding");
     }
 
     public static List<SportFacility> getSkateboardGrounds1() {
@@ -81,7 +83,7 @@ public class DataManager {
     }
 
     public static void setNetballCourts(List<SportFacility> netballCourts) {
-        DataManager.netballCourts = netballCourts;
+        DataManager.netballCourts = setType(netballCourts,"Netball");
     }
 
     public static List<SportFacility> getBeachVolleyballCourts() {
@@ -89,7 +91,7 @@ public class DataManager {
     }
 
     public static void setBeachVolleyballCourts(List<SportFacility> beachVolleyballCourts) {
-        DataManager.beachVolleyballCourts = beachVolleyballCourts;
+        DataManager.beachVolleyballCourts = setType(beachVolleyballCourts, "Beach Volleyball");
     }
 
     public static List<SportFacility> getRollerSkatingRinks() {
@@ -97,7 +99,7 @@ public class DataManager {
     }
 
     public static void setRollerSkatingRinks(List<SportFacility> rollerSkatingRinks) {
-        DataManager.rollerSkatingRinks = rollerSkatingRinks;
+        DataManager.rollerSkatingRinks = setType(rollerSkatingRinks, "Roller Skating");
     }
 
     public static List<SportFacility> getGateballCourts() {
@@ -105,7 +107,7 @@ public class DataManager {
     }
 
     public static void setGateballCourts(List<SportFacility> gateballCourts) {
-        DataManager.gateballCourts = gateballCourts;
+        DataManager.gateballCourts = setType(gateballCourts, "Gateball");
     }
 
     public static List<SportFacility> getCricketGrounds() {
@@ -113,7 +115,7 @@ public class DataManager {
     }
 
     public static void setCricketGrounds(List<SportFacility> cricketGrounds) {
-        DataManager.cricketGrounds = cricketGrounds;
+        DataManager.cricketGrounds = setType(cricketGrounds, "Cricket");
     }
 
     public static List<SportFacility> getCricketGrounds1() {
@@ -138,5 +140,13 @@ public class DataManager {
 
     public static void setCricketGrounds3(List<SportFacility> cricketGrounds3) {
         DataManager.cricketGrounds3 = cricketGrounds3;
+    }
+
+    private static List<SportFacility> setType(List<SportFacility> sportFacilityList, String type) {
+        for (SportFacility sportFac:
+             sportFacilityList) {
+            sportFac.setType(type);
+        }
+        return sportFacilityList;
     }
 }
