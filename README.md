@@ -1,7 +1,7 @@
 # Readme
-Since Google Map does not have most accurate data on Hong Kong's uncommon sports court, such as cricket court, handball court etc.  
-This app helps by listing out all the uncommon sports facilities in Hong Kong and show them in a in-app google map.  
-All the data comes from the open data provided by HK government on the data.gov.hk, therefore it will be more accurate then Google Map.
+- Since Google Map does not have most accurate data on Hong Kong's uncommon sports court, such as cricket court, handball court etc.  
+- This app helps by listing out all the uncommon sports facilities in Hong Kong and show them in a in-app google map.  
+- All the data comes from the open data provided by HK government on the data.gov.hk, therefore it will be more accurate then Google Map.
 
 ## Features
 - Sports facilities listing (Information includes Name, Description, location, Equipments etc)
